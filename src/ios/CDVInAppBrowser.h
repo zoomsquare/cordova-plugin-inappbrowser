@@ -48,6 +48,10 @@
 @property (nonatomic, assign) BOOL clearcache;
 @property (nonatomic, assign) BOOL clearsessioncache;
 
+@property (nonatomic, copy) NSString* cookiename;
+@property (nonatomic, copy) NSString* cookievalue;
+@property (nonatomic, copy) NSString* cookiedomain;
+@property (nonatomic, copy) NSString* cookiepath;
 @property (nonatomic, copy) NSString* presentationstyle;
 @property (nonatomic, copy) NSString* transitionstyle;
 

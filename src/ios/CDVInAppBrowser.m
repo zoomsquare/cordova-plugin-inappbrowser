@@ -126,6 +126,26 @@
             }
         }
     }
+    
+    if (browserOptions.cookiename) {
+        NSLog(browserOptions.cookiename);
+        NSLog(browserOptions.cookievalue);
+        NSLog(browserOptions.cookiedomain);
+        NSLog(browserOptions.cookiepath);
+        NSMutableDictionary *cookieProperties = [NSMutableDictionary dictionary];
+        [cookieProperties setObject:browserOptions.cookiename forKey:NSHTTPCookieName];
+        [cookieProperties setObject:browserOptions.cookievalue forKey:NSHTTPCookieValue];
+        [cookieProperties setObject:browserOptions.cookiedomain forKey:NSHTTPCookieDomain];
+        [cookieProperties setObject:browserOptions.cookiepath forKey:NSHTTPCookiePath];
+        
+        // set expiration to one month from now or any NSDate of your choosing
+        // this makes the cookie sessionless and it will persist across web sessions and app launches
+        /// if you want the cookie to be destroyed when your app exits, don't set this
+        [cookieProperties setObject:[[NSDate date] dateByAddingTimeInterval:2629743] forKey:NSHTTPCookieExpires];
+        
+        NSHTTPCookie *cookie = [NSHTTPCookie cookieWithProperties:cookieProperties];
+        [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
+    }
 
     if (browserOptions.clearsessioncache) {
         NSHTTPCookie *cookie;
